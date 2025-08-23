@@ -1,0 +1,15 @@
+server:
+  port: 8090
+
+spring:
+  application:
+    name: TaskManagementSystem
+  datasource:
+    url: jdbc:mysql://3.111.134.254:3306/task_management_sys
+    username: remoteadmin
+    password: $Srdt@217#
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
