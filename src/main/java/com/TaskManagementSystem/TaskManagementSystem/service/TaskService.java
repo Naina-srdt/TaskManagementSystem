@@ -1,5 +1,6 @@
 package com.TaskManagementSystem.TaskManagementSystem.service;
 
+import com.TaskManagementSystem.TaskManagementSystem.dto.InternDto;
 import com.TaskManagementSystem.TaskManagementSystem.dto.TaskDto;
 import com.TaskManagementSystem.TaskManagementSystem.entities.Intern;
 import com.TaskManagementSystem.TaskManagementSystem.entities.Task;
@@ -16,7 +17,7 @@ import java.util.stream.Collectors;
 public class TaskService {
 
     private final TaskRepo taskRepo;
-    private final  TaskMapper taskMapper;
+    private final TaskMapper taskMapper;
     private final InternRepo internRepo;
 
     public TaskService(TaskRepo taskRepo, TaskMapper taskMapper, InternRepo internRepo) {
@@ -36,27 +37,26 @@ public class TaskService {
     }
 
     //Get all tasks of an intern
-    public List<TaskDto> getTaskByIntern(Long internId){
+    public List<TaskDto> getTaskByIntern(Long internId) {
         return taskRepo.findByInternId(internId).stream()
                 .map(TaskMapper::toDto)
                 .collect(Collectors.toList());
     }
 
     //Update task status
-    public TaskDto updateStatus(Long taskId, Task.Status status){
+    public TaskDto updateStatus(Long taskId, Task.Status status) {
         Task task = taskRepo.findById(taskId).orElseThrow(() -> new CustomException("Not Found"));
         task.setStatus(status);
         return taskMapper.toDto(taskRepo.save(task));
     }
 
     //Find tasks of an intern by status
-    public List<TaskDto> getTaskByStatus(Long internId, Task.Status status){
-        return  taskRepo.findByInternAndStatus(internId, status).stream().map(TaskMapper::toDto).collect(Collectors.toList());
+    public List<TaskDto> getTaskByStatus(Long internId, Task.Status status) {
+        return taskRepo.findByInternAndStatus(internId, status).stream().map(TaskMapper::toDto).collect(Collectors.toList());
     }
 
     //Get latest 5 tasks of an intern
-    public List<TaskDto> getLatestTask(Long internId){
+    public List<TaskDto> getLatestTask(Long internId) {
         return taskRepo.findLatestTask(internId).stream().map(TaskMapper::toDto).collect(Collectors.toList());
     }
-
 }
