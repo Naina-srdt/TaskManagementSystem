@@ -1,6 +1,5 @@
 package com.TaskManagementSystem.TaskManagementSystem.service;
 
-import com.TaskManagementSystem.TaskManagementSystem.dto.InternDto;
 import com.TaskManagementSystem.TaskManagementSystem.dto.TaskDto;
 import com.TaskManagementSystem.TaskManagementSystem.entities.Intern;
 import com.TaskManagementSystem.TaskManagementSystem.entities.Task;
@@ -31,9 +30,8 @@ public class TaskService {
         Intern intern = internRepo.findById(taskDto.getIntern_id())
                 .orElseThrow(() -> new CustomException("Intern not found with ID: " + taskDto.getIntern_id()));
 
-        Task task = TaskMapper.toEntity(taskDto, intern);
-        Task savedTask = taskRepo.save(task);
-        return TaskMapper.toDto(savedTask);
+        Task task = taskMapper.toEntity(taskDto, intern);
+        return taskMapper.toDto(taskRepo.save(task));
     }
 
     //Get all tasks of an intern
@@ -45,14 +43,14 @@ public class TaskService {
 
     //Update task status
     public TaskDto updateStatus(Long taskId, Task.Status status) {
-        Task task = taskRepo.findById(taskId).orElseThrow(() -> new CustomException("Not Found"));
+        Task task = taskRepo.findById(taskId).orElseThrow(() -> new CustomException("Task Not Found"));
         task.setStatus(status);
         return taskMapper.toDto(taskRepo.save(task));
     }
 
     //Find tasks of an intern by status
-    public List<TaskDto> getTaskByStatus(Long internId, Task.Status status) {
-        return taskRepo.findByInternAndStatus(internId, status).stream().map(TaskMapper::toDto).collect(Collectors.toList());
+    public List<TaskDto> getInternTaskByStatus(Long internId, Task.Status status) {
+        return taskRepo.findInternByIdAndStatus(internId, status).stream().map(TaskMapper::toDto).collect(Collectors.toList());
     }
 
     //Get latest 5 tasks of an intern

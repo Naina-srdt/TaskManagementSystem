@@ -13,7 +13,7 @@ public class TaskMapper {
         task.setId(dto.getId());
         task.setTitle(dto.getTitle());
         task.setDescription(dto.getDescription());
-        task.setStatus(Task.Status.valueOf(dto.getStatus())); // assumes valid enum string
+        task.setStatus(Task.Status.valueOf(dto.getStatus()));
         task.setIntern(intern);
         return task;
     }

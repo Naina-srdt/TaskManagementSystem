@@ -8,6 +8,6 @@ public class TaskDto {
     private Long id;
     private String title;
     private String description;
-    private String  status;
+    private String status;
     private Long intern_id;
 }

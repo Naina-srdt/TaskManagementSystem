@@ -11,7 +11,7 @@ import java.util.List;
 public interface TaskRepo extends JpaRepository<Task, Long> {
 
     @Query(value = "select t from task where id = :internId AND status = IN_PROGRESS",nativeQuery = true)
-    List<Task> findByInternAndStatus(Long internId, Task.Status status);
+    List<Task> findInternByIdAndStatus(Long internId, Task.Status status);
 
     @Query(value = "SELECT * FROM task WHERE intern_id = :internId ORDER BY id DESC LIMIT 5",nativeQuery = true)
     List<Task> findLatestTask(Long internId);
