@@ -1,5 +1,6 @@
 package com.TaskManagementSystem.TaskManagementSystem.entities;
 
+import com.TaskManagementSystem.TaskManagementSystem.enums.Status;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -14,15 +15,11 @@ public class Task {
     private String title;
     private String description;
 
-    @Enumerated(EnumType.STRING)
-    private Status status;
-
     @ManyToOne
     @JoinColumn(name = "intern_id")
     @JsonIgnore
     private Intern intern;
 
-    public enum Status{
-        PENDING,IN_PROGRESS,COMPLETED;
-    }
+    @Enumerated(EnumType.STRING)
+    private Status status;
 }

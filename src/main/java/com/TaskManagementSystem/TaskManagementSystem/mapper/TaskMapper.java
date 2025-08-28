@@ -13,7 +13,7 @@ public class TaskMapper {
         task.setId(dto.id());
         task.setTitle(dto.title());
         task.setDescription(dto.description());
-        task.setStatus(Task.Status.valueOf(dto.status()));
+        task.setStatus(dto.status());
         task.setIntern(intern);
         return task;
     }
@@ -23,7 +23,7 @@ public class TaskMapper {
                 task.getId(),
                 task.getTitle(),
                 task.getDescription(),
-                task.getStatus().toString(),
+                task.getStatus(),
                 task.getIntern().getId()
         );
     }

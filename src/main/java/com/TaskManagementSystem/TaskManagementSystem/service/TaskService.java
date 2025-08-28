@@ -3,6 +3,7 @@ package com.TaskManagementSystem.TaskManagementSystem.service;
 import com.TaskManagementSystem.TaskManagementSystem.dto.TaskDto;
 import com.TaskManagementSystem.TaskManagementSystem.entities.Intern;
 import com.TaskManagementSystem.TaskManagementSystem.entities.Task;
+import com.TaskManagementSystem.TaskManagementSystem.enums.Status;
 import com.TaskManagementSystem.TaskManagementSystem.exception.CustomException;
 import com.TaskManagementSystem.TaskManagementSystem.mapper.TaskMapper;
 import com.TaskManagementSystem.TaskManagementSystem.repository.InternRepo;
@@ -42,14 +43,14 @@ public class TaskService {
     }
 
     //Update task status
-    public TaskDto updateStatus(Long taskId, Task.Status status) {
+    public TaskDto updateStatus(Long taskId, Status status) {
         Task task = taskRepo.findById(taskId).orElseThrow(() -> new CustomException("Task Not Found"));
         task.setStatus(status);
         return taskMapper.toDto(taskRepo.save(task));
     }
 
     //Find tasks of an intern by status
-    public List<TaskDto> getInternTaskByStatus(Long internId, Task.Status status) {
+    public List<TaskDto> getInternTaskByStatus(Long internId, Status status) {
         return taskRepo.findInternByIdAndStatus(internId, status).stream().map(taskMapper::toDto).collect(Collectors.toList());
     }
 

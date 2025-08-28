@@ -1,7 +1,7 @@
 package com.TaskManagementSystem.TaskManagementSystem.service;
 
 import com.TaskManagementSystem.TaskManagementSystem.dto.InternDto;
-import com.TaskManagementSystem.TaskManagementSystem.dto.TaskDto;
+import com.TaskManagementSystem.TaskManagementSystem.dto.projection.InternTaskDetails;
 import com.TaskManagementSystem.TaskManagementSystem.entities.Intern;
 import com.TaskManagementSystem.TaskManagementSystem.mapper.InternMapper;
 import com.TaskManagementSystem.TaskManagementSystem.repository.InternRepo;
@@ -20,14 +20,18 @@ public class InternService {
         this.mapper = mapper;
     }
 
-    //Create a new Intern
+    /*
+     * Create An Intern
+     * */
     public InternDto createIntern(InternDto internDto) {
         Intern intern = mapper.toEntity(internDto);
         return mapper.toDto(internRepo.save(intern));
     }
 
-    //Get Intern by their Name
-    public List<TaskDto> getByName(InternDto internDto, String name) {
-        return internRepo.findInternByName(name);
+    /*
+    * Get Intern with their Task details
+    * */
+    public List<InternTaskDetails> getInternTaskDetails() {
+        return internRepo.getInternTaskDetails();
     }
 }

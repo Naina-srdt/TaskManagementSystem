@@ -1,7 +1,7 @@
 package com.TaskManagementSystem.TaskManagementSystem.controller;
 
 import com.TaskManagementSystem.TaskManagementSystem.dto.TaskDto;
-import com.TaskManagementSystem.TaskManagementSystem.entities.Task;
+import com.TaskManagementSystem.TaskManagementSystem.enums.Status;
 import com.TaskManagementSystem.TaskManagementSystem.service.TaskService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +24,7 @@ public class TaskController {
     }
 
     @PutMapping("/{id}/status")
-    public TaskDto update(@PathVariable Long id, @RequestParam Task.Status status) {
+    public TaskDto update(@PathVariable Long id, @RequestParam Status status) {
         return taskService.updateStatus(id, status);
     }
 }

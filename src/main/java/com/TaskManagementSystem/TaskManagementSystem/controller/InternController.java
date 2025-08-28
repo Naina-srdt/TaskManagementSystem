@@ -2,7 +2,8 @@ package com.TaskManagementSystem.TaskManagementSystem.controller;
 
 import com.TaskManagementSystem.TaskManagementSystem.dto.InternDto;
 import com.TaskManagementSystem.TaskManagementSystem.dto.TaskDto;
-import com.TaskManagementSystem.TaskManagementSystem.entities.Task;
+import com.TaskManagementSystem.TaskManagementSystem.dto.projection.InternTaskDetails;
+import com.TaskManagementSystem.TaskManagementSystem.enums.Status;
 import com.TaskManagementSystem.TaskManagementSystem.service.InternService;
 import com.TaskManagementSystem.TaskManagementSystem.service.TaskService;
 import org.springframework.web.bind.annotation.*;
@@ -32,17 +33,18 @@ public class InternController {
     }
 
     @GetMapping("/{id}/tasks/status")
-    public List<TaskDto> getByTaskStatus(@PathVariable Long id, @RequestParam Task.Status status) {
+    public List<TaskDto> getByTaskStatus(@PathVariable Long id, @RequestParam Status status) {
         return taskService.getInternTaskByStatus(id, status);
     }
 
+    //
     @GetMapping("/{id}/tasks/latest")
-    public List<TaskDto> getLatestTask(@PathVariable Long id) {
-        return taskService.getLatestTask(id);
+    public List<TaskDto> getLatestTask(@PathVariable Long internId) {
+        return taskService.getLatestTask(internId);
     }
 
-    @GetMapping("/name/{name}")
-    public List<TaskDto> getInternByName(@RequestBody InternDto internDto, @RequestParam String name) {
-        return internService.getByName(internDto, name);
+    @GetMapping("/with-tasks")
+    public List<InternTaskDetails> getInternTaskDetails() {
+        return internService.getInternTaskDetails();
     }
 }

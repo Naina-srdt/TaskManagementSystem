@@ -22,4 +22,5 @@ public class Intern {
     @OneToMany(mappedBy = "intern", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Task> tasks;
+
 }
