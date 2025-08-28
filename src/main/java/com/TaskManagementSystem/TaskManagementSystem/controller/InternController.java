@@ -15,9 +15,15 @@ public class InternController {
 
     private final TaskService taskService;
     private final InternService internService;
+
     public InternController(TaskService taskService, InternService internService) {
         this.taskService = taskService;
         this.internService = internService;
+    }
+
+    @PostMapping("/add")
+    public InternDto createIntern(@RequestBody InternDto internDto) {
+        return internService.createIntern(internDto);
     }
 
     @GetMapping("/{id}/tasks")
@@ -35,8 +41,8 @@ public class InternController {
         return taskService.getLatestTask(id);
     }
 
-    @PostMapping("/add")
-    public InternDto createIntern(@RequestBody InternDto internDto){
-        return internService.createIntern(internDto);
+    @GetMapping("/name/{name}")
+    public List<TaskDto> getInternByName(@RequestBody InternDto internDto, @RequestParam String name) {
+        return internService.getByName(internDto, name);
     }
 }

@@ -27,8 +27,8 @@ public class TaskService {
 
     //Create a new task for an intern
     public TaskDto createTask(TaskDto taskDto) {
-        Intern intern = internRepo.findById(taskDto.getIntern_id())
-                .orElseThrow(() -> new CustomException("Intern not found with ID: " + taskDto.getIntern_id()));
+        Intern intern = internRepo.findById(taskDto.intern_id())
+                .orElseThrow(() -> new CustomException("Intern not found with ID: " + taskDto.intern_id()));
 
         Task task = taskMapper.toEntity(taskDto, intern);
         return taskMapper.toDto(taskRepo.save(task));
@@ -37,7 +37,7 @@ public class TaskService {
     //Get all tasks of an intern
     public List<TaskDto> getTaskByIntern(Long internId) {
         return taskRepo.findByInternId(internId).stream()
-                .map(TaskMapper::toDto)
+                .map(taskMapper::toDto)
                 .collect(Collectors.toList());
     }
 
@@ -50,11 +50,11 @@ public class TaskService {
 
     //Find tasks of an intern by status
     public List<TaskDto> getInternTaskByStatus(Long internId, Task.Status status) {
-        return taskRepo.findInternByIdAndStatus(internId, status).stream().map(TaskMapper::toDto).collect(Collectors.toList());
+        return taskRepo.findInternByIdAndStatus(internId, status).stream().map(taskMapper::toDto).collect(Collectors.toList());
     }
 
     //Get latest 5 tasks of an intern
     public List<TaskDto> getLatestTask(Long internId) {
-        return taskRepo.findLatestTask(internId).stream().map(TaskMapper::toDto).collect(Collectors.toList());
+        return taskRepo.findLatestTask(internId).stream().map(taskMapper::toDto).collect(Collectors.toList());
     }
 }

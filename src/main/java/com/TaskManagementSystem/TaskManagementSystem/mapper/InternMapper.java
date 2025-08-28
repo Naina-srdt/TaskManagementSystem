@@ -9,17 +9,17 @@ public class InternMapper {
 
     public Intern toEntity(InternDto interndto){
         Intern intern = new Intern();
-        intern.setId(interndto.getId());
-        intern.setName(interndto.getName());
-        intern.setEmail(interndto.getEmail());
+        intern.setId(interndto.id());
+        intern.setName(interndto.name());
+        intern.setEmail(interndto.email());
         return intern;
     }
 
     public InternDto toDto(Intern intern){
-        InternDto internDto = new InternDto();
-        internDto.setId(intern.getId());
-        internDto.setName(intern.getName());
-        internDto.setEmail(intern.getEmail());
-        return internDto;
+        return new InternDto(
+                intern.getId(),
+                intern.getName(),
+                intern.getEmail()
+        );
     }
 }

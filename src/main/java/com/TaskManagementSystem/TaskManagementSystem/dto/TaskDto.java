@@ -1,13 +1,10 @@
 package com.TaskManagementSystem.TaskManagementSystem.dto;
 
-import lombok.Data;
+public record TaskDto (
 
-@Data
-public class TaskDto {
-
-    private Long id;
-    private String title;
-    private String description;
-    private String status;
-    private Long intern_id;
-}
+     Long id,
+     String title,
+     String description,
+     String status,
+     Long intern_id
+) {}

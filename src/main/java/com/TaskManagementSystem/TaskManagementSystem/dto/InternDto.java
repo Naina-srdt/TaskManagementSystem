@@ -1,11 +1,8 @@
 package com.TaskManagementSystem.TaskManagementSystem.dto;
 
-import lombok.Data;
+public record InternDto(
 
-@Data
-public class InternDto {
-
-    private Long id;
-    private String name;
-    private String email;
-}
+     Long id,
+     String name,
+     String email
+) {}
