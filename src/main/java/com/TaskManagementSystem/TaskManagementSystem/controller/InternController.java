@@ -37,8 +37,7 @@ public class InternController {
         return taskService.getInternTaskByStatus(id, status);
     }
 
-    //
-    @GetMapping("/{id}/tasks/latest")
+    @GetMapping("/{internId}/tasks/latest")
     public List<TaskDto> getLatestTask(@PathVariable Long internId) {
         return taskService.getLatestTask(internId);
     }

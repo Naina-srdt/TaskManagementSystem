@@ -1,7 +1,6 @@
 package com.TaskManagementSystem.TaskManagementSystem.entities;
 
 import com.TaskManagementSystem.TaskManagementSystem.enums.Status;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -17,7 +16,6 @@ public class Task {
 
     @ManyToOne
     @JoinColumn(name = "intern_id")
-    @JsonIgnore
     private Intern intern;
 
     @Enumerated(EnumType.STRING)
